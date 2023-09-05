@@ -18,15 +18,13 @@ section{
     align-items: center;
 
 }
-#booleanText{
+.booleanText{
     margin-left: 10px;
 }
 article{
   display: flex;
   margin-bottom: 10px;
 }
-
-
 
 /* CSS button*/
 .button-24 {
