@@ -7,24 +7,43 @@
     <link rel="stylesheet" type="text/css" href="./logic-g.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Montserrat:wght@100;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Montserrat:wght@100;400;500;600;700&display=swap"
+          rel="stylesheet">
 
 </head>
 <body>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <span class="navbarBrand">Logic game</span>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="game">
+        <div class="level-info">
+            <span id="current-level">Уровень 1</span>
+            <span id="remaining-levels">Осталось подуровней: 4</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
 
-    <section>
         <div class="example">
 
+
         </div>
-        <button 
-            class="button-24" 
-            role="button" 
-            id="checkButton"
-            onclick="checkValue()"
-        >   
-            проверить
+        <button
+                class="button"
+                role="button"
+                id="checkButton"
+                onclick="checkValue()"
+        >
+            Проверить
         </button>
     </section>
-    <script src="./logic-g.js"></script>
+</main>
+
+<script src="./logic-g.js"></script>
 </body>
 </html>
