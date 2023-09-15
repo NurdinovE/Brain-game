@@ -1,70 +1,145 @@
 const expressions = [
+    //1
     {
         'Lvl': [
-            {"subLvl": ['0+1', '0+0', '0+1+0']},
-            {"subLvl": ['0+1', '0+0', '0+1+0']},
-            {"subLvl": ['0+1', '0+0', '0+1+0']}
+            {"subLvl": ['1']},
+            {"subLvl": ['0']},
+            {"subLvl": ['!0']},
+            {"subLvl": ['!1']},
+            {"subLvl": ['!1']}
+
         ]
     },
+    //2
     {
         'Lvl': [
-            {"subLvl": ['1+0*1', '1*0+1*0', '1+0+0*1']},
-            {"subLvl": ['1+0*1', '1*0+1*0', '1+0+0*1']},
-            {"subLvl": ['1+0*1', '1*0+1*0', '1+0+0*1']}
+            {"subLvl": ['1 * 1']},
+            {"subLvl": ['!0 * 1']},
+            {"subLvl": ['!0 * 0']},
+            {"subLvl": ['1 * 0']},
+            {"subLvl": ['0 * 0']}
         ]
     },
+    //3
     {
         'Lvl': [
-            {"subLvl": ["1+1*(0+0)+!1", '!(0*1)*1', '1*1*1*!0']},
-            {"subLvl": ["1+1*(0+0)+!1", '!(0*1)*1', '1*1*1*!0']},
-            {"subLvl": ["1+1*(0+0)+!1", '!(0*1)*1', '1*1*1*!0']}
+            {"subLvl": ['1 * 1 * 1']},
+            {"subLvl": ['!0 * 1 * 1']},
+            {"subLvl": ['!0 * !0 * !0']},
+            {"subLvl": ['1 * 0 * !0']},
+            {"subLvl": ['0 * 0 * 1']}
+
         ]
-    }
+    },
+    //4
+    {
+        'Lvl': [
+            {"subLvl": ['1 + 1']},
+            {"subLvl": ['!0 + 1']},
+            {"subLvl": ['!0 + 0']},
+            {"subLvl": ['!1 + 0']},
+            {"subLvl": ['0 + 0']}
+        ]
+    },
+    //5
+    {
+        'Lvl': [
+            {"subLvl": ['1 + 1 + 1']},
+            {"subLvl": ['!0 + 1 + 0']},
+            {"subLvl": ['!1 + 0 + !1']},
+            {"subLvl": ['0 + 0 + !0']},
+            {"subLvl": ['0 + 0 + 0']}
+        ]
+    },
+    //6
+    {
+        'Lvl': [
+            {"subLvl": ['1 * 1 + 0']},
+            {"subLvl": ['!0 * 1 + 0']},
+            {"subLvl": ['0 + 0 * 1']},
+            {"subLvl": ['0 * 0 + 1']},
+            {"subLvl": ['0 * !0 + 0']}
+        ]
+    },
+    //7
+    {
+        'Lvl': [
+            {"subLvl": ['!1 * !1 + 0']},
+            {"subLvl": ['!0 * 1 + 0']},
+            {"subLvl": ['!0 + 0 * !1']},
+            {"subLvl": ['!0 * !0 + !0']},
+            {"subLvl": ['0 + !0 * 0']}
+        ]
+    },
+    //8
+    {
+        'Lvl': [
+            {"subLvl": ['!1 * !1 + 0 * 1']},
+            {"subLvl": ['1 + 1 + 1 * 0']},
+            {"subLvl": ['!1 + 0 * !1 * 1']},
+            {"subLvl": ['!1 * !0 + !0 + 0']},
+            {"subLvl": ['!1 + !0 * 0 + 0']}
+        ]
+    },
+    //9
+    {
+        'Lvl': [
+            {"subLvl": ['(1 + 1) * !(0 + 0) * !0']},
+            {"subLvl": ['1 * (0 + !0) * !0 + 0']},
+            {"subLvl": ['0 + (!0 * 1) * 0 * 1']},
+            {"subLvl": ['!0 * !0 + !(0 + 0 + 0)']},
+            {"subLvl": ['0 + !0 * (0 * 1) + 0']}
+        ]
+    },
+    //10
+    {
+        'Lvl': [
+            {"subLvl": ['(0 + 0) * !(1 + 1) + !0 + 1 * 1']},
+            {"subLvl": ['0 + !(1 * 1 + !0) * !0 + 0 * 1']},
+            {"subLvl": ['!(0 + 0) * (!1 + 0) * (0 + 0 + !0)']},
+            {"subLvl": ['0 * 0 + 1 + 1 + (!0 * !0 + !0)']},
+            {"subLvl": ['(1 + 0 + !0) * 0 + !1 + !1 * 1']}
+        ]
+    },
 ]
-console.log(expressions)
 
 let currentLevel = 0; // Начальный уровень
-let currentSubLevel = 0 //Начальный подуровень
+let currentSubLevel = 0; // Начальный подуровень
+let score = 0; // Баллы игрока
+let consecutiveWrongAnswers = 0; // Количество неправильных ответов подряд
 
-// function checkExpressionsCompetition(bool, lvl = currentLevel, subLvl = currentSubLevel) {
-//     console.log(currentSubLevel, expressions[lvl].Lvl[subLvl].subLvl.length-1)
-//     if (currentSubLevel < expressions[lvl].Lvl[subLvl].subLvl.length) {
-//         if (bool) {
-//             // Если текущий уровень завершен, переходим на следующий уровень
-//             // currentLevel++;
-//             increaseSubLevel()
-//             // Обновляем интерфейс игры для нового уровня, например, обновляем задачи и текст
-//             updateGameInterface();
-//         }
-//     } else{
-//         currentSubLevel = 0
-//         increaseLevel()
-//         updateGameInterface()
-//         checkLevelCompletion(true)
-//     }
-// }
+
+
 function checkExpressionsCompetition(bool) {
-    if (currentSubLevel < expressions[currentLevel].Lvl.length - 1) {
-        if (bool) {
+    if (bool) {
+        if (currentSubLevel < expressions[currentLevel].Lvl.length - 1) {
             increaseSubLevel();
             updateGameInterface();
+        } else {
+            if (currentLevel < expressions.length - 1) {
+                alert(`New level ${currentLevel + 2}`);
+                setTimeout(() => {
+                    increaseLevel();
+                    currentSubLevel = 0;
+                    updateProgress();
+                    expressionGeneration();
+                }, 500);
+            } else {
+                // Все уровни и подуровни завершены, установите текст в элементе .example
+                document.querySelector('.example').innerHTML = 'Good Job <br> You have completed all levels!!!';
+                document.querySelector('#checkButton').remove();
+            }
         }
     } else {
-        // Подуровни текущего уровня закончились, проверяем завершение последнего уровня
-        if (currentLevel < expressions.length - 1) {
-            setTimeout(() => {
-                increaseLevel();
-            }, 1000);
-        } else {
-            // Все уровни и подуровни завершены, можно завершить игру или выполнить другие действия
-            document.querySelector('.example').innerHTML = 'Good Job'
-        }
+        alert("Incorrect answer.");
+        currentSubLevel = 0;
+        updateProgress();
+        expressionGeneration();
     }
 }
 
 function updateGameInterface() {
     expressionGeneration()
-    // solveEx()
     booleanValue()
 }
 
@@ -80,11 +155,11 @@ function booleanValue(index) {
     // Изменяем текст в соответствии с текущим значением
     if (displayText) {
         if (displayText?.textContent === "?") {
-            displayText.textContent = "1";
-        } else if (displayText?.textContent === "0") {
+            displayText.textContent = "true";
+        } else if (displayText?.textContent === "false") {
             displayText.textContent = "?";
         } else {
-            displayText.textContent = "0";
+            displayText.textContent = "false";
         }
     }
 }
@@ -93,47 +168,88 @@ function booleanValue(index) {
  * Функция генерирует HTML-код для заданных выражений на основе данных из массива expressions
  * и добавляет его в элемент с классом 'example'.
  */
-function expressionGeneration(lvl = currentLevel, subLvl = currentSubLevel) {
-    // Получаем ссылку на элемент с классом 'example'
+function expressionGeneration() {
     const exClass = document.querySelector('.example');
 
-    // Получаем данные для генерации из массива expressions
-    const data = expressions[lvl].Lvl[subLvl]?.subLvl;
-    // Создаем HTML-код на основе данных с использованием метода map()
+    const data = expressions[currentLevel].Lvl[currentSubLevel]?.subLvl;
+
     const htmlCode = data?.map((el, idx) => {
         return `<article id="${idx}">
-                <div class="exercise${idx}">${el}</div>
-                <span class="sq">=</span>
-                <div class="booleanText${idx}" onclick="booleanValue(${idx})">
-                  <span class="chooseText${idx}">?</span>
-                </div>
-              </article>`;
-    }).join("");
+            <div class="exercise${idx}">${el}</div>
+            <span class="sq">=</span>
+            <div class="booleanText${idx} booleanTextStyle" onclick="booleanValue(${idx})">
+                <span class="chooseText${idx}">?</span>
+            </div>
+        </article>`;
+    });
 
-    // Устанавливаем сгенерированный HTML-код внутрь элемента с классом 'example'
     exClass.innerHTML = htmlCode;
 }
+
 
 // Вызываем функцию для генерации HTML-кода
 expressionGeneration();
 
 
-function checkValue(lvl = currentLevel, subLvl = currentSubLevel) {
-    let allTasksCorrect = true; // Изначально считаем, что все задачи решены правильно
+function decreaseLevel() {
+    if (currentLevel > 0) {
+        currentLevel--;
+        currentSubLevel = 0; // Сбрасываем подуровень при понижении уровня
+        updateProgress();
+        expressionGeneration();
+    }
+}
 
-    expressions[lvl].Lvl[subLvl].subLvl.forEach((el, idx) => {
-        const displayNumber = document.querySelector(`.exercise${idx}`).textContent;
-        const displayEqual = document.querySelector(`.chooseText${idx}`).textContent;
-        let solved = eval(displayNumber);
-        if (solved !== +displayEqual) {
-            allTasksCorrect = false; // Если хотя бы одна задача решена неправильно, устанавливаем флаг в false
+
+function checkValue() {
+    console.log(`Before Check - currentLevel: ${currentLevel}, currentSubLevel: ${currentSubLevel}`);
+
+    let allTasksCorrect = true;
+
+    expressions[currentLevel].Lvl[currentSubLevel].subLvl.forEach((el, idx) => {
+        const displayExpression = document.querySelector(`.exercise${idx}`).textContent;
+        const displayResult = document.querySelector(`.chooseText${idx}`).textContent;
+        let solved = eval(displayExpression);
+
+        // Convert solved to false if it's 0
+        if (solved === 0) {
+            solved = false;
+        }
+        if (solved > 0) {
+            solved = true;
+        }
+
+        let expectedResult = (displayResult === 'true');
+
+        if (solved !== expectedResult) {
+            allTasksCorrect = false;
         }
     });
 
-    // После завершения цикла проверяем флаг и вызываем checkLevelCompletion с соответствующим значением
-    checkExpressionsCompetition(allTasksCorrect)
-    // checkLevelCompletion(allTasksCorrect);
+    if (allTasksCorrect) {
+        score++;
+        if (score >= 5) {
+            score = 0;
+        }
+        consecutiveWrongAnswers = 0;
+    } else {
+        consecutiveWrongAnswers++;
+        score = 0;
+
+        if (consecutiveWrongAnswers >= 3) {
+            consecutiveWrongAnswers = 0;
+            decreaseLevel();
+        } else {
+            currentSubLevel = 0;
+            expressionGeneration();
+        }
+    }
+
+    checkExpressionsCompetition(allTasksCorrect);
+
+    console.log(`After Check - currentLevel: ${currentLevel}, currentSubLevel: ${currentSubLevel}`);
 }
+
 
 // Определите общее количество подуровней и текущий уровень
 
@@ -143,14 +259,15 @@ const currentLevelElement = document.getElementById('current-level');
 const remainingLevelsElement = document.getElementById('remaining-levels');
 
 // Обновление информации о прогрессе
-function updateProgress(lvl = currentLevel, subLvl = currentSubLevel) {
-    const progressPercentage = (subLvl) / (expressions[lvl]?.Lvl[subLvl]?.subLvl.length) * 100;
+function updateProgress() {
+    const progressPercentage = (currentSubLevel + 1) / expressions[currentLevel]?.Lvl.length * 100;
 
     progressBar.style.width = `${progressPercentage}%`;
 
     currentLevelElement.textContent = `Уровень ${currentLevel + 1}`;
-    remainingLevelsElement.textContent = `${currentSubLevel + 1}/${expressions[lvl].Lvl[subLvl]?.subLvl.length}`;
+    remainingLevelsElement.textContent = `${currentSubLevel + 1}/${expressions[currentLevel]?.Lvl.length}`;
 }
+
 
 // Вызов функции для начальной настройки
 updateProgress();
@@ -159,11 +276,12 @@ updateProgress();
 function increaseLevel() {
     if (currentLevel < expressions.length - 1) {
         currentLevel++;
-        currentSubLevel = 0; // Сброс подуровня при переходе на новый уровень
+        currentSubLevel = 0; // Сбрасываем подуровень при переходе на новый уровень
         updateProgress();
         expressionGeneration();
     }
 }
+
 
 function increaseSubLevel() {
     if (currentSubLevel < expressions[currentLevel].Lvl.length - 1) {
@@ -174,54 +292,6 @@ function increaseSubLevel() {
         increaseLevel();
     }
 }
-
-// Пример: Уменьшение текущего уровня (вызывается при неудачном завершении подуровня)
-// function decreaseLevel() {
-//     if (currentLevel > 1) {
-//         currentLevel--;
-//         updateProgress();
-//     } else {
-//         alert('Вы уже находитесь на самом низком уровне!');
-//     }
-// }
-
-/**
- * Функция для решения задач на основе данных из массива expressions для указанного уровня (по умолчанию уровень 0).
- * Решает каждое выражение и выводит результат в консоль.
- */
-// function solveEx(lvl = currentLevel, subLvl = currentSubLevel) {
-//     // Проверяем, существует ли уровень lvl в массиве expressions
-//     if (lvl >= 0 && lvl < expressions.length) {
-//         // Получаем данные для решения задач из массива expressions
-//         const expressionsToSolve = expressions[lvl].subLvl[subLvl];
-//
-//         // Итерируемся по каждому выражению и решаем его
-//         expressionsToSolve.forEach((el, idx) => {
-//             // Получаем текст выражения из соответствующего элемента с классом 'exercise${idx}'
-//             const displayNumber = document.querySelector(`.exercise${idx}`).textContent;
-//
-//             // Вычисляем значение выражения с помощью функции eval()
-//             let solved = eval(displayNumber);
-//
-//             // Выводим результат решения в консоль
-//             if (solved) {
-//                 console.log(`Решение ${el} : ${solved}`);
-//             } else {
-//                 console.log(`Решение ${el} : Не удалось решить`);
-//             }
-//         });
-//     } else {
-//         document.querySelector('.example').innerHTML =
-//             `
-//             <div class="finish">
-//                 Good Job
-//             </div>
-//             `
-//         ;
-//     }
-// }
-// Вызываем функцию для решения задач на уровне по умолчанию (уровень 0)
-// solveEx();
 
 
 // function factorial(n) {
